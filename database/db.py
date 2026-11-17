@@ -28,6 +28,34 @@ def init_db():
             )
         """)
 
+
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS hasil_preprocessing (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                berita_id INTEGER NOT NULL UNIQUE,
+                teks_preprocessing TEXT NOT NULL,
+                processed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+                FOREIGN KEY (berita_id)
+                    REFERENCES berita(id)
+                    ON DELETE CASCADE
+            )
+        """)
+
+
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS hasil_sentimen (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                berita_id INTEGER NOT NULL UNIQUE,
+                skor_sentimen REAL NOT NULL,
+                label_sentimen TEXT NOT NULL,
+                processed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (berita_id)
+                    REFERENCES berita(id)
+                    ON DELETE CASCADE
+            )
+        """)
+
         conn.commit()
         print("Database TILIEK berhasil disiapkan.")
 

@@ -72,7 +72,6 @@ def case_folding(teks):
     return teks.lower()
 
 
-
 def cleaning(teks):
     """Membersihkan teks dengan mempertahankan angka dan satuan."""
 
@@ -95,7 +94,6 @@ def cleaning(teks):
     teks = re.sub(r"\s+", " ", teks)
 
     return teks.strip()
-
 
 
 def tokenizing(teks):
@@ -144,7 +142,6 @@ def preprocessing(teks):
     return " ".join(tokens)
 
 
-
 def proses_semua_berita():
     from database.db import get_connection, init_db
 
@@ -153,9 +150,15 @@ def proses_semua_berita():
 
     try:
         berita_list = conn.execute("""
-            SELECT id, judul, ringkasan
-            FROM berita
-            ORDER BY id ASC
+            SELECT
+                b.id,
+                b.judul,
+                b.ringkasan
+            FROM berita b
+            LEFT JOIN hasil_preprocessing hp
+                ON b.id = hp.berita_id
+            WHERE hp.berita_id IS NULL
+            ORDER BY b.id ASC
         """).fetchall()
 
         for berita in berita_list:
@@ -180,7 +183,7 @@ def proses_semua_berita():
 
         conn.commit()
 
-        print(f"Berhasil memproses {len(berita_list)} berita.")
+        print(f"Berhasil memproses {len(berita_list)} berita baru.")
 
     except Exception as e:
         conn.rollback()

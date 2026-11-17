@@ -77,11 +77,14 @@ def proses_semua_sentimen():
     try:
         berita_list = conn.execute("""
             SELECT
-                id,
-                judul,
-                ringkasan
-            FROM berita
-            ORDER BY id ASC
+                b.id,
+                b.judul,
+                b.ringkasan
+            FROM berita b
+            LEFT JOIN hasil_sentimen hs
+                ON b.id = hs.berita_id
+            WHERE hs.berita_id IS NULL
+            ORDER BY b.id ASC
         """).fetchall()
 
         total = len(berita_list)
@@ -123,7 +126,7 @@ def proses_semua_sentimen():
                     f"Memproses berita {nomor}/{total}"
                 )
 
-        print(f"\nBerhasil menganalisis {total} berita.")
+        print(f"\nBerhasil menganalisis {total} berita baru.")
 
     except Exception as e:
         conn.rollback()

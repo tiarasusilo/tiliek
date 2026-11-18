@@ -1,6 +1,8 @@
-
 from collections import Counter
 from urllib.parse import urlparse
+
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 
 import feedparser
 from bs4 import BeautifulSoup
@@ -42,6 +44,26 @@ def bersihkan(html):
     return BeautifulSoup(
         html or "", "html.parser"
     ).get_text(" ", strip=True)
+
+
+def berita_terbaru(tanggal):
+    if not tanggal:
+        return False
+
+    try:
+        waktu = parsedate_to_datetime(tanggal)
+
+        if waktu.tzinfo is None:
+            waktu = waktu.replace(tzinfo=timezone.utc)
+
+        sekarang = datetime.now(timezone.utc)
+
+        selisih = sekarang - waktu
+
+        return timedelta(0) <= selisih <= timedelta(hours=24)
+
+    except (ValueError, TypeError, OverflowError):
+        return False
 
 
 def kanal_url(url):
@@ -115,8 +137,13 @@ def crawl():
 
             url = e.link.split("?")[0]
             judul = bersihkan(e.title)
+            tanggal = e.get("published") or e.get("updated", "")
 
-            if url in sudah or not lolos(cfg, e, url, judul):
+            if (
+                url in sudah
+                or not lolos(cfg, e, url, judul)
+                or not berita_terbaru(tanggal)
+            ):
                 continue
 
             sudah.add(url)
@@ -125,7 +152,7 @@ def crawl():
                 "sumber": cfg["media"],
                 "judul": judul,
                 "url": url,
-                "tanggal_terbit": e.get("published", ""),
+                "tanggal_terbit": tanggal,
                 "ringkasan": bersihkan(e.get("description", "")),
             })
 

@@ -1,4 +1,3 @@
-
 # Virtual Environment
 venv/
 env/
@@ -33,3 +32,11 @@ desktop.ini
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# News Dataset
+berita.csv

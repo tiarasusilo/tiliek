@@ -56,6 +56,48 @@ def init_db():
             )
         """)
 
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS hasil_clustering (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                berita_id INTEGER NOT NULL UNIQUE,
+                cluster_id INTEGER NOT NULL,
+                kata_kunci TEXT,
+                processed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+                FOREIGN KEY (berita_id)
+                    REFERENCES berita(id)
+                    ON DELETE CASCADE
+            )
+        """)
+
+
+        # Tabel identitas topik
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS topik (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nama_topik TEXT NOT NULL,
+                kata_kunci TEXT,
+                nama_manual INTEGER DEFAULT 0,
+                aktif INTEGER DEFAULT 1,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        # Migrasi database lama: tambahkan topik_id jika belum ada
+        kolom_clustering = [
+            row["name"]
+            for row in conn.execute(
+                "PRAGMA table_info(hasil_clustering)"
+            ).fetchall()
+        ]
+
+        if "topik_id" not in kolom_clustering:
+            conn.execute("""
+                ALTER TABLE hasil_clustering
+                ADD COLUMN topik_id INTEGER
+            """)
+
         conn.commit()
         print("Database TILIEK berhasil disiapkan.")
 

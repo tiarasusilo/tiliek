@@ -3,7 +3,6 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 from database.db import get_connection, init_db
 
-
 MODEL_NAME = "dwili/bert-bahasa-sentimen-berita"
 
 LABEL_MAPPING = {

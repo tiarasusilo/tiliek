@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}TILIEK{% endblock %}</title>
+
+    <meta name="description" content="TILIEK - Mengurai Arus Informasi">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Base CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <!-- Page CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- Header -->
+
+<header class="site-header">
+
+    <!-- Baris utama -->
+    <div class="masthead">
+        <div class="masthead-date">
+            <span id="current-date">Memuat tanggal...</span>
+            <small>Data diperbarui 16.00 WIB</small>
+        </div>
+
+        <a href="{{ url_for('index') }}" class="brand">
+
+            <img
+                src="{{ url_for('static', filename='img/logo-dark.svg') }}"
+                alt="TILIEK"
+                class="brand-logo logo-dark"
+            >
+
+            <img
+                src="{{ url_for('static', filename='img/logo-light.svg') }}"
+                alt="TILIEK"
+                class="brand-logo logo-light"
+            >
+
+            <div class="brand-tagline">
+                <div class="brand-tagline-track">
+                    <span>BERITA · DATA · PERSPEKTIF</span>
+                    <span>BERITA · DATA · PERSPEKTIF</span>
+                </div>
+            </div>
+
+        </a>
+
+        <div class="masthead-actions">
+            <div class="search-box">
+                <input
+                    type="text"
+                    placeholder="Cari berita, topik, atau kata kunci..."
+                >
+                <button aria-label="Cari">⌕</button>
+            </div>
+
+            <button class="theme-button" aria-label="Ganti tema">
+                ☼
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigasi -->
+    <nav class="main-nav">
+        <a href="{{ url_for('index') }}">Sorotan</a>
+        <a href="{{ url_for('telusur') }}">Telusur</a>
+        <a href="{{ url_for('peta_isu') }}">Peta Isu</a>
+        <a href="{{ url_for('chatbot') }}">Tanya Tiliek</a>
+        <a href="{{ url_for('tentang') }}">Tentang</a>
+    </nav>
+
+</header>
+
+
+    <!-- Breaking News -->
+    <div class="breaking-news">
+        <div class="breaking-label">
+            BREAKING NEWS
+        </div>
+
+        <div class="breaking-content">
+            <div class="breaking-track">
+                <span>
+                    Membaca perkembangan isu dari berbagai sumber berita.
+                    Menemukan pola di balik arus informasi.
+                    Mengolah berita menjadi perspektif.
+                </span>
+
+                <span aria-hidden="true">
+                    Membaca perkembangan isu dari berbagai sumber berita.
+                    Menemukan pola di balik arus informasi.
+                    Mengolah berita menjadi perspektif.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-top">
+
+            <img
+                src="{{ url_for('static', filename='img/logo-dark.svg') }}"
+                alt="TILIEK"
+                class="footer-logo logo-dark"
+            >
+
+            <img
+                src="{{ url_for('static', filename='img/logo-light.svg') }}"
+                alt="TILIEK"
+                class="footer-logo logo-light"
+            >
+
+            <p class="footer-slogan">
+                Mengurai Arus Informasi
+            </p>
+
+        </div>
+
+        <div class="footer-grid">
+            <div class="footer-col">
+                <p>Platform monitoring dan analisis isu publik
+                berbasis crawling berita dan text mining.</p>
+                <small>Data diperbarui setiap hari, 16.00 WIB</small>
+            </div>
+
+            <div class="footer-col">
+                <h3>TELUSURI</h3>
+                <ul class="footer-links two-col">
+                    <li><a href="{{ url_for('index') }}">Sorotan</a></li>
+                    <li><a href="{{ url_for('peta_isu') }}">Peta Isu</a></li>
+                    <li><a href="{{ url_for('telusur') }}">Telusur</a></li>
+                    <li><a href="{{ url_for('chatbot') }}">Tanya Tiliek</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>TENTANG DATA</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('tentang') }}#sumber">Sumber media</a></li>
+                    <li><a href="{{ url_for('tentang') }}#metodologi">Metodologi</a></li>
+                    <li><a href="{{ url_for('tentang') }}#catatan">Catatan data</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 TILIEK. All rights reserved.</span>
+            <span>TILIEK bukan portal berita. Setiap berita ditautkan ke sumber aslinya.</span>
+        </div>
+        <p class="footer-note">Sentimen dihitung otomatis dan dapat tidak sempurna.</p>
+    </footer>
+
+    <!-- Base JavaScript -->
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+
+    <!-- Page JavaScript -->
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

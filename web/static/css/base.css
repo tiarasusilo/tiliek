@@ -1,0 +1,853 @@
+/* ==================================================
+   TILIEK
+   BASE STYLESHEET
+   Theme: Editorial News & Data
+================================================== */
+
+
+/* ==================================================
+   1. DESIGN TOKENS
+================================================== */
+
+:root {
+    /* Brand Colors */
+    --kertas: #F7F5F0;
+    --tinta: #14213D;
+    --merah: #D7261E;
+    --biru: #3A5A8C;
+    --garis: #DCE1EA;
+    --putih: #FFFFFF;
+    --abu: #747B88;
+
+    /* Sentiment Colors */
+    --positif: #2E7D5B;
+    --netral: #5F6C85;
+    --negatif: #C2412D;
+
+    /* Footer Colors */
+    --footer-bg: #14213D;
+    --footer-text: #F7F5F0;
+    --footer-border: #2B3A5C;
+    --footer-muted: #B8C2D6;
+
+    /* Typography */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Layout */
+    --container-width: 1280px;
+    --page-padding: 40px;
+
+    /* Effects */
+    --transition: 0.2s ease;
+}
+
+/* Dark Theme */
+
+html[data-theme="dark"] {
+    --kertas: #101827;
+    --tinta: #F7F5F0;
+    --merah: #E34B42;
+    --biru: #6F91C5;
+    --garis: #2B3A50;
+    --putih: #192438;
+    --abu: #AAB4C3;
+
+    --positif: #43A47B;
+    --netral: #8492A8;
+    --negatif: #E16B58;
+}
+
+
+/* ==================================================
+   2. RESET & GLOBAL STYLES
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--kertas);
+    color: var(--tinta);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    transition:
+        background-color var(--transition),
+        color var(--transition);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* ==================================================
+   3. GLOBAL LAYOUT
+================================================== */
+
+.main-content {
+    width: 100%;
+    max-width: var(--container-width);
+    min-height: 65vh;
+    margin: 0 auto;
+    padding: 40px var(--page-padding);
+}
+
+
+/* ==================================================
+   4. SITE HEADER
+================================================== */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    width: 100%;
+
+    background-color: var(--kertas);
+    border-bottom: 1px solid var(--garis);
+}
+
+/* Masthead */
+
+.masthead {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+
+    max-width: var(--container-width);
+    min-height: 90px;
+    margin: 0 auto;
+    padding: 15px var(--page-padding);
+}
+
+/* Date Information */
+
+.masthead-date {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.masthead-date span {
+    color: var(--tinta);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.masthead-date small {
+    color: var(--abu);
+    font-size: 9px;
+}
+
+/* Brand */
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+/* Logo */
+
+.brand-logo {
+    width: 125px;
+    height: auto;
+}
+
+/* Logo Visibility - Light Mode */
+
+.site-header .logo-dark {
+    display: block;
+}
+
+.site-header .logo-light {
+    display: none;
+}
+
+/* Logo Visibility - Dark Mode */
+
+html[data-theme="dark"] .site-header .logo-dark {
+    display: none;
+}
+
+html[data-theme="dark"] .site-header .logo-light {
+    display: block;
+}
+
+/* Animated Tagline */
+
+.brand-tagline {
+    width: 155px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.brand-tagline-track {
+    display: flex;
+    width: max-content;
+    animation: tagline-scroll 7s linear infinite;
+}
+
+.brand-tagline-track span {
+    flex-shrink: 0;
+    padding-right: 25px;
+
+    color: var(--abu);
+    font-family: var(--font-body);
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+@keyframes tagline-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.brand-tagline:hover .brand-tagline-track {
+    animation-play-state: paused;
+}
+
+/* Header Actions */
+
+.masthead-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+/* ==================================================
+   5. SEARCH COMPONENT
+================================================== */
+
+.search-box {
+    display: flex;
+    align-items: center;
+
+    width: 240px;
+    height: 36px;
+    padding: 0 12px;
+
+    background-color: var(--putih);
+    border: 1px solid var(--garis);
+    border-radius: 30px;
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+
+    color: var(--tinta);
+    background: transparent;
+    border: none;
+    outline: none;
+
+    font-size: 9px;
+}
+
+.search-box input::placeholder {
+    color: var(--abu);
+}
+
+.search-box button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    color: var(--tinta);
+    background: transparent;
+    border: none;
+
+    font-size: 17px;
+}
+
+
+/* ==================================================
+   6. THEME BUTTON
+================================================== */
+
+.theme-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    color: var(--tinta);
+    background-color: var(--putih);
+    border: 1px solid var(--garis);
+    border-radius: 50%;
+
+    font-size: 19px;
+    transition: var(--transition);
+}
+
+.theme-button:hover {
+    color: var(--putih);
+    background-color: var(--tinta);
+    border-color: var(--tinta);
+}
+
+
+/* ==================================================
+   7. MAIN NAVIGATION
+================================================== */
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 38px;
+
+    min-height: 45px;
+    padding: 0 20px;
+
+    border-top: 1px solid var(--garis);
+}
+
+.main-nav a {
+    position: relative;
+
+    color: var(--tinta);
+    font-size: 11px;
+    font-weight: 600;
+
+    transition: color var(--transition);
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--merah);
+}
+
+.main-nav a.active::after {
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+    left: 0;
+
+    height: 2px;
+    background-color: var(--merah);
+
+    content: "";
+}
+
+
+/* ==================================================
+   8. BREAKING NEWS
+================================================== */
+
+.breaking-news {
+    display: flex;
+    align-items: center;
+
+    min-height: 38px;
+    overflow: hidden;
+
+    color: #FFFFFF;
+    background-color: #14213D;
+}
+
+.breaking-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    height: 38px;
+    padding: 0 22px;
+
+    color: #FFFFFF;
+    background-color: #D7261E;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.breaking-content {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.breaking-track {
+    display: flex;
+    width: max-content;
+
+    animation: breaking-scroll 35s linear infinite;
+}
+
+.breaking-track span {
+    flex-shrink: 0;
+    padding-right: 60px;
+
+    color: #FFFFFF;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+}
+
+@keyframes breaking-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.breaking-content:hover .breaking-track {
+    animation-play-state: paused;
+}
+
+
+/* ==================================================
+   9. SECTION COMPONENTS
+================================================== */
+
+/* Section Heading */
+
+.section-heading {
+    margin-bottom: 24px;
+}
+
+.section-heading h2 {
+    color: var(--tinta);
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.section-heading p {
+    margin-top: 5px;
+    color: var(--abu);
+    font-size: 13px;
+}
+
+/* Category Label */
+
+.kategori {
+    display: inline-block;
+
+    color: var(--merah);
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+/* ==================================================
+   10. BUTTON COMPONENTS
+================================================== */
+
+.tombol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 20px;
+
+    color: #FFFFFF;
+    background-color: var(--merah);
+    border: 1px solid var(--merah);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition: var(--transition);
+}
+
+.tombol:hover {
+    color: var(--merah);
+    background-color: transparent;
+}
+
+.tombol-outline {
+    color: var(--merah);
+    background-color: transparent;
+}
+
+.tombol-outline:hover {
+    color: #FFFFFF;
+    background-color: var(--merah);
+}
+
+
+/* ==================================================
+   11. CARD COMPONENT
+================================================== */
+
+.kartu {
+    padding: 22px;
+
+    background-color: var(--putih);
+    border: 1px solid var(--garis);
+}
+
+
+/* ==================================================
+   12. SENTIMENT COMPONENTS
+================================================== */
+
+.sentimen {
+    display: inline-block;
+    padding: 5px 10px;
+
+    color: #FFFFFF;
+    border-radius: 3px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.sentimen-positif {
+    background-color: var(--positif);
+}
+
+.sentimen-netral {
+    background-color: var(--netral);
+}
+
+.sentimen-negatif {
+    background-color: var(--negatif);
+}
+
+/* Sentiment Bar */
+
+.bar-sentimen {
+    display: flex;
+
+    width: 100%;
+    height: 8px;
+    overflow: hidden;
+
+    background-color: var(--garis);
+}
+
+.bar-sentimen .positif {
+    background-color: var(--positif);
+}
+
+.bar-sentimen .netral {
+    background-color: var(--netral);
+}
+
+.bar-sentimen .negatif {
+    background-color: var(--negatif);
+}
+
+
+/* ==================================================
+   13. MENU & DARK PANEL
+================================================== */
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.panel-gelap {
+    padding: 25px;
+
+    color: #FFFFFF;
+    background-color: #14213D;
+}
+
+
+/* ==================================================
+   14. SITE FOOTER
+================================================== */
+
+.site-footer {
+    margin-top: 64px;
+    padding: 0 32px 20px;
+
+    color: var(--footer-text);
+    background-color: var(--footer-bg);
+    border-top: 4px solid var(--merah);
+}
+
+/* Footer Container */
+
+.footer-top,
+.footer-grid,
+.footer-bottom,
+.footer-note {
+    max-width: var(--container-width);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Footer Top */
+
+.footer-top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    padding: 28px 0 22px;
+
+    border-bottom: 1px solid var(--footer-border);
+}
+
+.footer-logo {
+    width: auto;
+    height: 40px;
+}
+
+/* Footer Logo - Always Light */
+
+.site-footer .logo-dark {
+    display: none;
+}
+
+.site-footer .logo-light {
+    display: block;
+}
+
+.footer-slogan {
+    margin: 0;
+    padding-left: 16px;
+
+    color: var(--footer-muted);
+    border-left: 1px solid var(--footer-border);
+}
+
+/* Footer Grid */
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1.2fr 1fr;
+    gap: 32px;
+
+    padding: 28px 0;
+}
+
+.footer-col p {
+    margin-bottom: 14px;
+    color: #DCE1EA;
+}
+
+.footer-col small {
+    color: var(--footer-muted);
+}
+
+.footer-col h3 {
+    margin-bottom: 14px;
+
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+}
+
+/* Footer Links */
+
+.footer-links {
+    display: grid;
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.footer-links.two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+}
+
+.footer-links a {
+    color: #DCE1EA;
+    transition: color var(--transition);
+}
+
+.footer-links a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/* Footer Bottom */
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+
+    padding: 14px 0;
+
+    color: var(--footer-muted);
+    border-top: 1px solid var(--footer-border);
+
+    font-size: 12px;
+}
+
+/* Footer Note */
+
+.footer-note {
+    margin-top: 0;
+
+    color: var(--footer-muted);
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   15. RESPONSIVE DESIGN
+================================================== */
+
+@media (max-width: 900px) {
+
+    :root {
+        --page-padding: 24px;
+    }
+
+    .masthead {
+        min-height: 85px;
+    }
+
+    .search-box {
+        width: 190px;
+    }
+
+    .main-nav {
+        gap: 25px;
+    }
+
+    .main-content {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
+
+
+@media (max-width: 760px) {
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .masthead {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+    .brand {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    .masthead-date {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .masthead-actions {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .brand-logo {
+        width: 115px;
+    }
+
+    .search-box {
+        width: 150px;
+    }
+
+    .search-box input {
+        font-size: 8px;
+    }
+
+    .main-nav {
+        justify-content: flex-start;
+        gap: 25px;
+        overflow-x: auto;
+        padding: 0 20px;
+    }
+
+    .main-nav a {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    .breaking-label {
+        padding: 0 12px;
+        font-size: 9px;
+    }
+
+    .breaking-content {
+        padding: 0 12px;
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+    .site-footer {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .footer-top {
+        gap: 12px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+}

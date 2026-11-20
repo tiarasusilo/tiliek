@@ -35,7 +35,7 @@
             <small>Data diperbarui 16.00 WIB</small>
         </div>
 
-        <a href="{{ url_for('index') }}" class="brand">
+        <a href="{{ url_for('sorotan') }}" class="brand">
 
             <img
                 src="{{ url_for('static', filename='img/logo-dark.svg') }}"
@@ -75,7 +75,7 @@
 
     <!-- Navigasi -->
     <nav class="main-nav">
-        <a href="{{ url_for('index') }}">Sorotan</a>
+        <a href="{{ url_for('sorotan') }}">Sorotan</a>
         <a href="{{ url_for('telusur') }}">Telusur</a>
         <a href="{{ url_for('peta_isu') }}">Peta Isu</a>
         <a href="{{ url_for('chatbot') }}">Tanya Tiliek</a>
@@ -145,7 +145,7 @@
             <div class="footer-col">
                 <h3>TELUSURI</h3>
                 <ul class="footer-links two-col">
-                    <li><a href="{{ url_for('index') }}">Sorotan</a></li>
+                    <li><a href="{{ url_for('sorotan') }}">Sorotan</a></li>
                     <li><a href="{{ url_for('peta_isu') }}">Peta Isu</a></li>
                     <li><a href="{{ url_for('telusur') }}">Telusur</a></li>
                     <li><a href="{{ url_for('chatbot') }}">Tanya Tiliek</a></li>

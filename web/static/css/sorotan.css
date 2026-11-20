@@ -1,0 +1,650 @@
+/* ==================================================
+   TILIEK
+   HALAMAN SOROTAN
+================================================== */
+
+
+/* ==================================================
+   1. TOKEN KHUSUS HALAMAN
+================================================== */
+
+.home-page {
+    --teks-isi: color-mix(in srgb, var(--tinta) 82%, var(--kertas));
+    --durasi-slide: 3000ms;
+}
+
+
+/* ==================================================
+   2. ELEMEN UMUM
+================================================== */
+
+.section-kicker {
+    display: block;
+    margin-bottom: 8px;
+
+    color: var(--merah);
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+
+    border-bottom: 2px solid var(--tinta);
+}
+
+.section-heading h2 {
+    color: var(--tinta);
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 3.4vw, 36px);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.section-heading p {
+    max-width: 360px;
+
+    color: var(--abu);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.section-note {
+    color: var(--abu);
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+}
+
+.overview-section,
+.activity-section,
+.issue-section {
+    margin-bottom: 72px;
+}
+
+
+/* ==================================================
+   3. HERO HIGHLIGHT
+================================================== */
+
+.highlight-section {
+    --gelap-bg: #14213D;
+    --gelap-teks: #F7F5F0;
+    --gelap-redup: #B8C2D6;
+    --gelap-garis: #2B3A5C;
+    --merah-terang: #F0524A;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+
+    margin-bottom: 72px;
+    padding: 36px 48px 28px;
+
+    color: var(--gelap-teks);
+    background-color: var(--gelap-bg);
+    border-bottom: 4px solid var(--merah);
+}
+
+/* Metadata atas */
+
+.highlight-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+}
+
+.highlight-heading .section-kicker {
+    margin-bottom: 0;
+    color: var(--merah-terang);
+}
+
+.highlight-period {
+    color: var(--gelap-redup);
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-align: right;
+}
+
+/* Judul utama */
+
+.highlight-title h1 {
+    max-width: 820px;
+    margin: 0;
+
+    color: var(--gelap-teks);
+    font-family: var(--font-heading);
+    font-size: clamp(40px, 6.4vw, 78px);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+}
+
+
+/* ==================================================
+   4. CAROUSEL
+   Gerak slide diatur lewat transform pada .highlight-track
+   (diubah oleh sorotan.js)
+================================================== */
+
+.highlight-carousel {
+    overflow: hidden;
+
+    background-color: var(--gelap-bg);
+    border: 1px solid var(--gelap-garis);
+    box-shadow: 10px 10px 0 var(--merah);
+}
+
+.highlight-track {
+    display: flex;
+
+    transition: transform 700ms cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+}
+
+.highlight-slide {
+    position: relative;
+    flex: 0 0 100%;
+
+    min-width: 0;
+    aspect-ratio: 21 / 9;
+    overflow: hidden;
+}
+
+.highlight-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* Lapisan gelap di bawah agar teks tetap terbaca di foto apa pun */
+
+.highlight-overlay {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 12px;
+
+    padding: 48px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(20, 33, 61, 0.92) 0%,
+            rgba(20, 33, 61, 0.55) 45%,
+            rgba(20, 33, 61, 0) 80%
+        );
+}
+
+.highlight-category {
+    color: var(--merah-terang);
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.highlight-overlay h2 {
+    max-width: 640px;
+
+    color: var(--gelap-teks);
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+}
+
+.highlight-overlay p {
+    max-width: 480px;
+
+    color: #DCE1EA;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* Navigasi: indikator di kiri, kontrol di kanan */
+
+.highlight-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    padding: 16px 24px;
+
+    border-top: 1px solid var(--gelap-garis);
+}
+
+.highlight-indicators {
+    display: flex;
+    flex: 1;
+    gap: 8px;
+
+    max-width: 360px;
+}
+
+.indicator {
+    position: relative;
+    flex: 1;
+
+    height: 24px;
+    padding: 0;
+    overflow: hidden;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+/* Garis tipis sebagai jalur, isinya terisi selama slide aktif */
+
+.indicator::before,
+.indicator::after {
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    height: 3px;
+    margin-top: -1.5px;
+
+    content: "";
+}
+
+.indicator::before {
+    width: 100%;
+
+    background-color: var(--gelap-garis);
+    transition: background-color var(--transition);
+}
+
+.indicator:hover::before {
+    background-color: var(--gelap-redup);
+}
+
+.indicator::after {
+    width: 0;
+
+    background-color: var(--merah-terang);
+}
+
+.indicator.active::after {
+    animation: isi-indikator var(--durasi-slide) linear forwards;
+}
+
+/* Saat autoplay dijeda (hover / fokus), isian ikut berhenti */
+
+.highlight-carousel.is-paused .indicator.active::after {
+    animation-play-state: paused;
+}
+
+/* Kalau autoplay mati (reduced motion), tampilkan isian penuh */
+
+.highlight-carousel.no-autoplay .indicator.active::after {
+    width: 100%;
+    animation: none;
+}
+
+@keyframes isi-indikator {
+    from { width: 0; }
+    to   { width: 100%; }
+}
+
+.highlight-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.slide-counter {
+    margin-right: 12px;
+
+    color: var(--gelap-redup);
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+.slide-counter strong {
+    color: var(--gelap-teks);
+}
+
+.highlight-controls button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    color: var(--gelap-teks);
+    background-color: transparent;
+    border: 1px solid var(--gelap-garis);
+    border-radius: 0;
+    cursor: pointer;
+
+    font-size: 18px;
+    line-height: 1;
+
+    transition: var(--transition);
+}
+
+.highlight-controls button:hover {
+    background-color: var(--merah);
+    border-color: var(--merah);
+}
+
+/* Baris bawah hero (sama seperti hero halaman Tentang) */
+
+.highlight-caption {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+
+    padding-top: 16px;
+
+    color: var(--gelap-redup);
+    border-top: 1px solid var(--gelap-garis);
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+}
+
+
+/* ==================================================
+   5. GAMBARAN UMUM
+================================================== */
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 24px;
+}
+
+.overview-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 28px 32px;
+
+    background-color: var(--putih);
+    border: 1px solid var(--garis);
+    border-top: 6px solid var(--merah);
+}
+
+.overview-label {
+    color: var(--merah);
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.overview-item strong {
+    display: block;
+
+    color: var(--tinta);
+    font-family: var(--font-heading);
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums;
+}
+
+.overview-description {
+    color: var(--abu);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Kartu utama: bayangan merah solid, selaras dengan penghitung di Telusur */
+
+.overview-primary {
+    box-shadow: 10px 10px 0 var(--merah);
+}
+
+.overview-primary strong {
+    font-size: clamp(72px, 9vw, 112px);
+    line-height: 0.95;
+}
+
+
+/* ==================================================
+   6. AKTIVITAS BERITA
+================================================== */
+
+.activity-container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+}
+
+.activity-description p {
+    color: var(--teks-isi);
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.activity-chart-container {
+    position: relative;
+
+    width: 100%;
+    height: 345px;
+    padding: 20px;
+
+    background-color: var(--putih);
+    border: 1px solid var(--garis);
+}
+
+.activity-chart-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+/* ==================================================
+   7. ISU YANG MENONJOL (GRAFIK BATANG)
+================================================== */
+
+.issue-chart-container {
+    position: relative;
+
+    width: 100%;
+    height: 520px;
+    margin-bottom: 16px;
+    padding: 24px 28px 16px 20px;
+
+    background-color: var(--putih);
+    border: 1px solid var(--garis);
+    border-top: 2px solid var(--tinta);
+}
+
+.issue-chart-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.issue-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    padding: 56px 24px;
+
+    text-align: center;
+}
+
+.issue-empty p {
+    color: var(--abu);
+    font-size: 14px;
+}
+
+.issue-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+
+    padding-top: 16px;
+
+    color: var(--abu);
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+}
+
+
+/* ==================================================
+   8. FOKUS KEYBOARD
+================================================== */
+
+.home-page a:focus-visible,
+.home-page button:focus-visible {
+    outline: 3px solid var(--biru);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .highlight-track {
+        transition: none;
+    }
+
+    .indicator.active::after {
+        width: 100%;
+        animation: none;
+    }
+}
+
+
+/* ==================================================
+   9. RESPONSIVE
+================================================== */
+
+@media (max-width: 900px) {
+
+    .highlight-section {
+        gap: 28px;
+        padding: 28px 24px 24px;
+    }
+
+    .highlight-carousel {
+        box-shadow: 6px 6px 0 var(--merah);
+        margin-right: 6px;
+    }
+
+    .highlight-slide {
+        aspect-ratio: 4 / 3;
+    }
+
+    .highlight-overlay {
+        padding: 28px 24px;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .overview-primary {
+        grid-column: 1 / -1;
+    }
+
+    .activity-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .highlight-heading {
+        align-items: flex-start;
+    }
+
+    .highlight-period {
+        text-align: left;
+    }
+
+    .highlight-slide {
+        aspect-ratio: 3 / 4;
+    }
+
+    .highlight-overlay p {
+        font-size: 14px;
+    }
+
+    .highlight-navigation {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+
+    .highlight-indicators {
+        max-width: none;
+    }
+
+    .highlight-controls {
+        justify-content: space-between;
+    }
+
+    .slide-counter {
+        margin-right: auto;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .overview-item {
+        padding: 22px 24px;
+    }
+
+    .activity-chart-container {
+        height: 280px;
+        padding: 12px;
+    }
+
+    .issue-chart-container {
+        height: 440px;
+        padding: 12px;
+    }
+}

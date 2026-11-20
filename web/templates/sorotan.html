@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+
+{% block title %}Sorotan — TILIEK{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sorotan.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<main class="home-page">
+
+
+    <!-- HERO HIGHLIGHT -->
+    <section class="highlight-section">
+
+        <!-- META ATAS -->
+        <div class="highlight-heading">
+            <span class="section-kicker">TILIEK / SOROTAN</span>
+            <span class="highlight-period">
+                BERITA · DATA · PERSPEKTIF
+            </span>
+        </div>
+
+        <!-- JUDUL -->
+        <div class="highlight-title">
+            <h1>Mengurai arus informasi.</h1>
+        </div>
+
+        <!-- CAROUSEL -->
+        <div class="highlight-carousel" data-carousel>
+
+            <div class="highlight-track" data-carousel-track>
+
+                <article class="highlight-slide">
+                    <img
+                        src="https://i.pinimg.com/736x/20/2e/de/202edecfda915d4e229b29c26a438edf.jpg"
+                        alt="Ilustrasi pemerintahan"
+                    >
+
+                    <div class="highlight-overlay">
+                        <span class="highlight-category">01 / PEMERINTAHAN</span>
+                        <h2>Membaca arah<br>kebijakan publik.</h2>
+                        <p>
+                            Mengikuti perkembangan dinamika pemerintahan
+                            melalui pemberitaan berbagai media.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="highlight-slide">
+                    <img
+                        src="https://i.pinimg.com/736x/22/93/b9/2293b9029ec937f74b93923fcdb77b76.jpg"
+                        alt="Ilustrasi ekonomi"
+                    >
+
+                    <div class="highlight-overlay">
+                        <span class="highlight-category">02 / EKONOMI</span>
+                        <h2>Memahami gerak<br>ekonomi Indonesia.</h2>
+                        <p>
+                            Mengamati perkembangan ekonomi dan aktivitas
+                            bisnis dalam arus pemberitaan.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="highlight-slide">
+                    <img
+                        src="https://i.pinimg.com/1200x/1f/07/03/1f0703ad0b3e7e7e7305d0460dac6d0f.jpg"
+                        alt="Ilustrasi pendidikan"
+                    >
+
+                    <div class="highlight-overlay">
+                        <span class="highlight-category">03 / PENDIDIKAN</span>
+                        <h2>Menyoroti masa<br>depan pendidikan.</h2>
+                        <p>
+                            Mengikuti berbagai perkembangan dan persoalan
+                            pendidikan di Indonesia.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="highlight-slide">
+                    <img
+                        src="https://i.pinimg.com/1200x/2e/cd/b0/2ecdb0aa35fc13487e1219edf4354903.jpg"
+                        alt="Ilustrasi teknologi"
+                    >
+
+                    <div class="highlight-overlay">
+                        <span class="highlight-category">04 / TEKNOLOGI</span>
+                        <h2>Melihat perubahan<br>era digital.</h2>
+                        <p>
+                            Menelusuri perkembangan teknologi dan
+                            transformasi digital.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="highlight-slide">
+                    <img
+                        src="https://i.pinimg.com/1200x/ee/b8/64/eeb8644190472bdbbc0f6864b2719c02.jpg"
+                        alt="Ilustrasi lingkungan"
+                    >
+
+                    <div class="highlight-overlay">
+                        <span class="highlight-category">05 / LINGKUNGAN</span>
+                        <h2>Menjaga ruang<br>hidup bersama.</h2>
+                        <p>
+                            Mengamati isu lingkungan dan keberlanjutan
+                            dalam pemberitaan.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- NAVIGASI CAROUSEL -->
+            <div class="highlight-navigation">
+
+                <div class="highlight-indicators">
+                    <button type="button" class="indicator active"
+                        data-slide-to="0" aria-label="Slide 1"></button>
+                    <button type="button" class="indicator"
+                        data-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" class="indicator"
+                        data-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" class="indicator"
+                        data-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" class="indicator"
+                        data-slide-to="4" aria-label="Slide 5"></button>
+                </div>
+
+                <div class="highlight-controls">
+                    <span class="slide-counter">
+                        <strong data-current-slide>01</strong> / 05
+                    </span>
+
+                    <button type="button" data-prev-slide
+                        aria-label="Slide sebelumnya">←</button>
+
+                    <button type="button" data-next-slide
+                        aria-label="Slide berikutnya">→</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="highlight-caption">
+            <span>PUSAT PEMANTAUAN ISU PUBLIK</span>
+            <span>VISUAL HIGHLIGHT TILIEK</span>
+        </div>
+
+    </section>
+
+
+    <!-- NEWS OVERVIEW -->
+    <section class="overview-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">GAMBARAN UMUM</span>
+                <h2>Arus pemberitaan</h2>
+            </div>
+
+            <p>
+                Ringkasan data berita yang berhasil dihimpun
+                oleh TILIEK.
+            </p>
+        </div>
+
+        <div class="overview-grid">
+
+            <article class="overview-item overview-primary">
+                <span class="overview-label">TOTAL BERITA TERHIMPUN</span>
+                <strong>{{ total_news|default(0) }}</strong>
+                <span class="overview-description">
+                    Seluruh berita dalam basis data
+                </span>
+            </article>
+
+            <article class="overview-item">
+                <span class="overview-label">TOPIK TERPANTAU</span>
+                <strong>{{ total_topics|default(0) }}</strong>
+                <span class="overview-description">
+                    Kelompok isu hasil pengolahan berita
+                </span>
+            </article>
+
+            <article class="overview-item">
+                <span class="overview-label">SUMBER MEDIA</span>
+                <strong>{{ total_sources|default(0) }}</strong>
+                <span class="overview-description">
+                    Media yang dihimpun
+                </span>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- NEWS ACTIVITY -->
+    <section class="activity-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">INTENSITAS PEMBERITAAN</span>
+                <h2>Aktivitas berita</h2>
+            </div>
+
+            <span class="section-note">
+                PERKEMBANGAN VOLUME BERITA
+            </span>
+        </div>
+
+        <div class="activity-container">
+
+            <div class="activity-description">
+                <p>
+                    Pergerakan jumlah berita yang masuk ke dalam
+                    sistem berdasarkan waktu penerbitan.
+                </p>
+            </div>
+
+            <div class="activity-chart-container">
+                <canvas
+                    id="newsActivityChart"
+                    data-labels='{{ news_activity_labels | tojson }}'
+                    data-values='{{ news_activity_values | tojson }}'>
+                </canvas>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ISSUE OVERVIEW -->
+    <section class="issue-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">PERHATIAN PUBLIK</span>
+                <h2>Isu yang menonjol</h2>
+            </div>
+
+            <p>
+                Topik dengan jumlah pemberitaan terbanyak
+                dalam periode pemantauan.
+            </p>
+        </div>
+
+        <div class="issue-chart-container">
+            {% if top_topics %}
+                <canvas
+                    id="issueChart"
+                    data-labels='{{ top_topics | map(attribute="nama_topik") | list | tojson }}'
+                    data-values='{{ top_topics | map(attribute="jumlah_berita") | list | tojson }}'>
+                </canvas>
+            {% else %}
+                <div class="issue-empty">
+                    <p>
+                        Ringkasan topik akan tersedia setelah
+                        data analisis berhasil diproses.
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="issue-footer">
+            <span>RINGKASAN TOPIK PEMBERITAAN</span>
+            <span>DATA HASIL PENGOLAHAN TILIEK</span>
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/sorotan.js') }}"></script>
+{% endblock %}

@@ -25,7 +25,7 @@ def chatbot():
 
 @app.route("/tentang")
 def tentang():
-    return render_template("home.html")
+    return render_template("tentang.html")
 
 
 if __name__ == "__main__":

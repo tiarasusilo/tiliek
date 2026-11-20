@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+
+{% block title %}Tentang TILIEK — Mengurai Arus Informasi{% endblock %}
+
+{% block content %}
+
+{% block page_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/tentang.css') }}">
+{% endblock %}
+
+<!-- =========================================
+     HERO
+========================================= -->
+<section class="about-hero">
+    <div class="about-hero-meta">
+        <span>TENTANG TILIEK</span>
+        <span>BERITA · DATA · PERSPEKTIF</span>
+    </div>
+
+    <div class="about-hero-content">
+        <p class="about-eyebrow">MEMBACA LEBIH DARI SEKADAR BERITA</p>
+
+        <h1>
+            Memahami isu<br>
+            di balik <span>arus berita.</span>
+        </h1>
+
+        <p class="about-hero-description">
+            Informasi hadir setiap hari dari berbagai sumber.
+            TILIEK membantu mengurai arus pemberitaan menjadi
+            pola, kecenderungan, dan perspektif yang lebih mudah dipahami.
+        </p>
+    </div>
+
+    <div class="about-hero-footer">
+        <span>01 / PENGENALAN</span>
+        <span>MENGURAI ARUS INFORMASI</span>
+    </div>
+</section>
+
+
+<!-- =========================================
+     ABOUT DESCRIPTION
+========================================= -->
+<section class="about-section about-introduction">
+    <div class="about-section-label">
+        <span>01</span>
+        <span>TENTANG TILIEK</span>
+    </div>
+
+    <div class="about-section-content">
+        <h2>
+            Bukan sekadar membaca berita,
+            tetapi memahami apa yang sedang terjadi.
+        </h2>
+
+        <div class="about-description-grid">
+            <p>
+                TILIEK merupakan platform monitoring dan analisis isu publik
+                berbasis crawling berita dan text mining. Platform ini
+                mengumpulkan pemberitaan dari berbagai media daring untuk
+                membantu pengguna melihat perkembangan isu melalui data.
+            </p>
+
+            <p>
+                Melalui pengolahan teks, analisis sentimen, dan pengelompokan
+                berita, TILIEK menyajikan informasi secara lebih terstruktur.
+                Pengguna dapat menelusuri pemberitaan, mengenali topik yang
+                banyak dibicarakan, serta melihat kecenderungan sentimen
+                dalam suatu isu.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- =========================================
+     DATA SOURCES
+========================================= -->
+<section class="about-section about-sources" id="sumber">
+    <div class="about-section-label">
+        <span>02</span>
+        <span>SUMBER MEDIA</span>
+    </div>
+
+    <div class="about-section-content">
+        <div class="about-section-heading">
+            <div>
+                <p class="about-eyebrow">DARI BERBAGAI SUMBER</p>
+                <h2>Berita dikumpulkan,<br>informasi dirangkum.</h2>
+            </div>
+
+            <p class="about-section-intro">
+                TILIEK memanfaatkan Really Simple Syndication (RSS)
+                untuk mengambil informasi pemberitaan dari media daring
+                yang menyediakan layanan tersebut.
+            </p>
+        </div>
+
+        <div class="source-list">
+            <div class="source-item">
+                <span class="source-number">01</span>
+                <div>
+                    <h3>Detik.com</h3>
+                    <p>Media berita daring</p>
+                </div>
+                <span class="source-type">RSS FEED</span>
+            </div>
+
+            <div class="source-item">
+                <span class="source-number">02</span>
+                <div>
+                    <h3>Detik Finance</h3>
+                    <p>Pemberitaan ekonomi dan keuangan</p>
+                </div>
+                <span class="source-type">RSS FEED</span>
+            </div>
+
+            <div class="source-item">
+                <span class="source-number">03</span>
+                <div>
+                    <h3>CNN Indonesia</h3>
+                    <p>Media berita nasional</p>
+                </div>
+                <span class="source-type">RSS FEED</span>
+            </div>
+
+            <div class="source-item">
+                <span class="source-number">04</span>
+                <div>
+                    <h3>Republika</h3>
+                    <p>Media berita nasional</p>
+                </div>
+                <span class="source-type">RSS FEED</span>
+            </div>
+        </div>
+
+        <p class="about-note">
+            Daftar sumber dapat berkembang mengikuti ketersediaan
+            dan akses RSS dari masing-masing media.
+        </p>
+    </div>
+</section>
+
+
+<!-- =========================================
+     METHODOLOGY
+========================================= -->
+<section class="about-section about-methodology" id="metodologi">
+    <div class="about-section-label">
+        <span>03</span>
+        <span>METODOLOGI</span>
+    </div>
+
+    <div class="about-section-content">
+        <p class="about-eyebrow">DARI BERITA MENJADI DATA</p>
+
+        <h2>Bagaimana TILIEK bekerja?</h2>
+
+        <p class="about-section-intro">
+            Setiap berita melewati beberapa tahapan pengolahan
+            sebelum ditampilkan sebagai informasi yang dapat dianalisis.
+        </p>
+
+        <div class="method-list">
+
+            <article class="method-item">
+                <div class="method-number">01</div>
+                <div class="method-content">
+                    <span class="method-category">PENGUMPULAN DATA</span>
+                    <h3>News Crawling</h3>
+                    <p>
+                        Mengambil data pemberitaan dari berbagai media
+                        daring melalui RSS Feed, termasuk judul, isi,
+                        tanggal publikasi, dan tautan berita.
+                    </p>
+                </div>
+            </article>
+
+            <article class="method-item">
+                <div class="method-number">02</div>
+                <div class="method-content">
+                    <span class="method-category">PENGOLAHAN TEKS</span>
+                    <h3>Text Preprocessing</h3>
+                    <p>
+                        Membersihkan dan mempersiapkan teks berita melalui
+                        tahapan seperti case folding, tokenisasi,
+                        stopword removal, dan stemming agar siap diproses.
+                    </p>
+                </div>
+            </article>
+
+            <article class="method-item">
+                <div class="method-number">03</div>
+                <div class="method-content">
+                    <span class="method-category">ANALISIS SENTIMEN</span>
+                    <h3>Sentiment Analysis</h3>
+                    <p>
+                        Mengidentifikasi kecenderungan sentimen pemberitaan
+                        ke dalam kategori positif, netral, dan negatif
+                        menggunakan model analisis sentimen berbasis BERT.
+                    </p>
+                </div>
+            </article>
+
+            <article class="method-item">
+                <div class="method-number">04</div>
+                <div class="method-content">
+                    <span class="method-category">PENGELOMPOKAN BERITA</span>
+                    <h3>News Clustering</h3>
+                    <p>
+                        Mengelompokkan berita berdasarkan kemiripan teks
+                        menggunakan TF-IDF dan K-Means untuk membantu
+                        mengenali topik pemberitaan.
+                    </p>
+                </div>
+            </article>
+
+            <article class="method-item">
+                <div class="method-number">05</div>
+                <div class="method-content">
+                    <span class="method-category">PENYAJIAN INFORMASI</span>
+                    <h3>Data Visualization</h3>
+                    <p>
+                        Menyajikan hasil pengolahan dalam bentuk ringkasan,
+                        distribusi sentimen, perkembangan jumlah berita,
+                        dan kelompok topik melalui antarmuka TILIEK.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- =========================================
+     DATA NOTES
+========================================= -->
+<section class="about-section about-data-notes" id="catatan">
+    <div class="about-section-label">
+        <span>04</span>
+        <span>CATATAN DATA</span>
+    </div>
+
+    <div class="about-section-content">
+        <p class="about-eyebrow">MEMBACA DATA DENGAN BIJAK</p>
+
+        <h2>Hal yang perlu diketahui.</h2>
+
+        <div class="data-note-list">
+
+            <article class="data-note-item">
+                <span class="data-note-number">01</span>
+                <div>
+                    <h3>Cakupan pemberitaan</h3>
+                    <p>
+                        Data yang ditampilkan berasal dari media daring
+                        yang terhubung dengan sistem crawling TILIEK.
+                        Karena itu, hasil analisis belum mewakili seluruh
+                        pemberitaan maupun keseluruhan opini publik.
+                    </p>
+                </div>
+            </article>
+
+            <article class="data-note-item">
+                <span class="data-note-number">02</span>
+                <div>
+                    <h3>Interpretasi sentimen</h3>
+                    <p>
+                        Kategori positif, netral, dan negatif merupakan
+                        hasil klasifikasi otomatis terhadap teks berita.
+                        Hasilnya dapat dipengaruhi oleh konteks, pilihan
+                        kata, dan karakteristik model yang digunakan.
+                    </p>
+                </div>
+            </article>
+
+            <article class="data-note-item">
+                <span class="data-note-number">03</span>
+                <div>
+                    <h3>Pengelompokan topik</h3>
+                    <p>
+                        Pengelompokan berita didasarkan pada kemiripan
+                        teks. Nama atau label topik digunakan untuk
+                        mempermudah pembacaan dan tidak selalu
+                        menggambarkan keseluruhan isi kelompok.
+                    </p>
+                </div>
+            </article>
+
+            <article class="data-note-item">
+                <span class="data-note-number">04</span>
+                <div>
+                    <h3>Bukan penentu kebenaran</h3>
+                    <p>
+                        Hasil analisis TILIEK merupakan alat bantu
+                        eksplorasi informasi, bukan penentu kebenaran
+                        suatu berita. Pengguna tetap disarankan membaca
+                        artikel asli dan membandingkan berbagai sumber.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

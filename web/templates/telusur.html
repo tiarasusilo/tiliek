@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+
+{% block title %}Telusur Berita — TILIEK{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/telusur.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="telusur-page">
+
+    <!-- PAGE HEADER -->
+    <section class="telusur-header">
+
+        <div class="telusur-header-top">
+            <span class="section-kicker">ARSIP BERITA</span>
+            <span class="header-date">BERITA · DATA · PERSPEKTIF</span>
+        </div>
+
+        <div class="telusur-heading">
+            <div>
+                <h1>Menelusuri<br><em>arus informasi.</em></h1>
+                <p>
+                    Temukan dan telusuri berita dari berbagai media
+                    untuk memahami isu yang sedang berkembang.
+                </p>
+            </div>
+
+            <div class="telusur-total">
+                <span class="total-label">BERITA TERHIMPUN</span>
+                <strong>{{ total_news }}</strong>
+                <span class="total-caption">hasil ditemukan</span>
+            </div>
+        </div>
+
+        <div class="telusur-header-bottom">
+            <span>02 / ARSIP</span>
+            <span>MENGURAI ARUS INFORMASI</span>
+        </div>
+
+    </section>
+
+
+    <!-- SEARCH AND FILTER -->
+    <section class="telusur-tools">
+        <form method="GET" action="{{ url_for('telusur') }}" class="telusur-form">
+
+            <div class="search-field">
+                <label for="keyword">KATA KUNCI</label>
+                <div class="search-input-wrap">
+                    <input
+                        type="search"
+                        id="keyword"
+                        name="q"
+                        placeholder="Cari judul atau isi ringkasan berita..."
+                        value="{{ keyword }}"
+                    >
+                    <button type="submit" aria-label="Cari berita">
+                        <span>Telusuri</span>
+                        <span aria-hidden="true">↗</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="filter-fields">
+
+                <div class="filter-group">
+                    <label for="sumber">SUMBER MEDIA</label>
+                    <select id="sumber" name="sumber">
+                        <option value="">Semua media</option>
+                        {% for source in sources %}
+                            <option
+                                value="{{ source['sumber'] }}"
+                                {% if selected_source == source['sumber'] %}selected{% endif %}
+                            >
+                                {{ source['sumber'] }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="dari">DARI TANGGAL</label>
+                    <input
+                        type="date"
+                        id="dari"
+                        name="dari"
+                        value="{{ tanggal_dari }}"
+                    >
+                </div>
+
+                <div class="filter-group">
+                    <label for="sampai">SAMPAI TANGGAL</label>
+                    <input
+                        type="date"
+                        id="sampai"
+                        name="sampai"
+                        value="{{ tanggal_sampai }}"
+                    >
+                </div>
+
+                <button type="submit" class="filter-button">
+                    Terapkan Filter
+                </button>
+
+                <a href="{{ url_for('telusur') }}" class="reset-filter">
+                    Reset
+                </a>
+
+            </div>
+        </form>
+    </section>
+
+
+    <!-- NEWS LIST -->
+    <section class="news-archive">
+
+        <div class="archive-heading">
+            <div>
+                <span class="section-kicker">HASIL PENELUSURAN</span>
+                <h2>Arsip berita</h2>
+            </div>
+
+            <span class="archive-count">
+                {{ total_news }} berita
+            </span>
+        </div>
+
+
+        {% if news %}
+
+            <div class="news-list">
+
+                {% for item in news %}
+                    <article class="news-item">
+
+                        <div class="news-meta">
+                            <span class="news-source">{{ item['sumber'] }}</span>
+
+                            {% if item['tanggal_terbit'] %}
+                                <span class="news-date">
+                                    {{ item['tanggal_terbit'] }}
+                                </span>
+                            {% else %}
+                                <span class="news-date">Tanggal tidak tersedia</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="news-content">
+                            <h3>
+                                <a
+                                    href="{{ item['url'] }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {{ item['judul'] }}
+                                </a>
+                            </h3>
+
+                            {% if item['ringkasan'] %}
+                                <p>{{ item['ringkasan'] }}</p>
+                            {% else %}
+                                <p class="empty-summary">
+                                    Ringkasan berita tidak tersedia.
+                                </p>
+                            {% endif %}
+
+                            <a
+                                href="{{ item['url'] }}"
+                                class="read-news"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Baca berita asli <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+
+                    </article>
+                {% endfor %}
+
+            </div>
+
+
+            <!-- PAGINATION -->
+            {% if total_pages > 1 %}
+                <nav class="pagination" aria-label="Navigasi halaman">
+
+                    {% if page > 1 %}
+                        <a
+                            href="{{ url_for(
+                                'telusur',
+                                q=keyword,
+                                sumber=selected_source,
+                                dari=tanggal_dari,
+                                sampai=tanggal_sampai,
+                                page=page - 1
+                            ) }}"
+                            class="page-link"
+                        >
+                            ← Sebelumnya
+                        </a>
+                    {% else %}
+                        <span class="page-link disabled">← Sebelumnya</span>
+                    {% endif %}
+
+                    <span class="page-info">
+                        Halaman <strong>{{ page }}</strong> dari {{ total_pages }}
+                    </span>
+
+                    {% if page < total_pages %}
+                        <a
+                            href="{{ url_for(
+                                'telusur',
+                                q=keyword,
+                                sumber=selected_source,
+                                dari=tanggal_dari,
+                                sampai=tanggal_sampai,
+                                page=page + 1
+                            ) }}"
+                            class="page-link"
+                        >
+                            Selanjutnya →
+                        </a>
+                    {% else %}
+                        <span class="page-link disabled">Selanjutnya →</span>
+                    {% endif %}
+
+                </nav>
+            {% endif %}
+
+
+        {% else %}
+
+            <div class="news-empty">
+                <span class="empty-symbol">∅</span>
+                <h3>Berita tidak ditemukan.</h3>
+                <p>
+                    Coba gunakan kata kunci atau filter pencarian yang berbeda.
+                </p>
+                <a href="{{ url_for('telusur') }}">Tampilkan semua berita</a>
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+{% endblock %}
